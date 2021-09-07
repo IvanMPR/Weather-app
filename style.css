@@ -1,0 +1,173 @@
+:root {
+  --main-background-gradient: linear-gradient(
+    135deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(55, 68, 73, 1) 100%
+  );
+  --main-background: rgb(34, 193, 195);
+  --text-primary-color: #fff;
+  --border-color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  width: 100vw;
+  /* height: 100vh; */
+  padding: 1rem;
+  background: var(--main-background);
+  /*background: var(--main-background-gradient) no-repeat; */
+  overflow-x: hidden;
+  color: var(--text-primary-color);
+}
+.italic {
+  font-style: italic;
+}
+.large {
+  font-size: 7rem;
+}
+.data-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 3.3rem;
+  margin: 2rem;
+}
+h2 {
+  font-size: 2.5rem;
+  margin: 1.5rem;
+}
+p {
+  font-size: 2.2rem;
+  margin: 1.5rem;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+input {
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+button {
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.app-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.box {
+  width: 50rem;
+  min-height: 50rem;
+  border: 1px solid var(--border-color);
+  margin: 3rem;
+  padding: 2rem;
+}
+
+.icon-wrapper {
+  margin: 1rem;
+  height: 35%;
+  display: grid;
+  place-items: center;
+}
+
+.weather-icons {
+  width: 35%;
+}
+.wind-gadget {
+  width: 50%;
+  margin: auto;
+}
+/* media queries */
+@media only screen and (max-width: 375px) {
+  html {
+    font-size: 45%;
+  }
+  body {
+    padding: 0;
+  }
+  p {
+    margin: 1.3rem;
+  }
+  .app-wrapper {
+    flex-direction: column;
+  }
+  form {
+    flex-direction: column;
+  }
+  button {
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .box {
+    padding: 0 3rem;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 376px) and (max-width: 600px) {
+  html {
+    font-size: 55%;
+  }
+  body {
+    padding: 0;
+  }
+  p {
+    margin: 1.4rem;
+  }
+  .app-wrapper {
+    flex-direction: column;
+  }
+  form {
+    flex-direction: column;
+  }
+  button {
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .box {
+    padding: 0 3rem;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 1100px) {
+  html {
+    font-size: 62.5%;
+  }
+  .app-wrapper {
+    flex-direction: column;
+  }
+  form {
+    flex-direction: column;
+  }
+  button {
+    width: 43%;
+    margin-top: 2rem;
+  }
+  .box {
+    width: 55rem;
+    margin: 1rem;
+  }
+}
+@media only screen and (min-width: 1101px) and (max-width: 1400px) {
+  html {
+    font-size: 50%;
+  }
+}
