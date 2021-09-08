@@ -134,7 +134,7 @@ function renderData(obj) {
   temperature.textContent = `${obj.temp}°C`;
   date.textContent = obj.showDate();
   overall.textContent = obj.overallDesc;
-  pressure.textContent = obj.pressure;
+  pressure.textContent = `${obj.pressure} mb`;
   feelsLike.textContent = `${obj.feelsLike}°C`;
   tempHi.textContent = obj.max;
   tempLow.textContent = obj.min;
