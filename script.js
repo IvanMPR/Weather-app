@@ -1,6 +1,5 @@
 'use-strict';
 
-const API_KEY = '25f76a4f0875a7268665e799574424e1';
 const input = document.querySelector('input');
 // const loc = input.value;
 const button = document.querySelector('button');
@@ -14,6 +13,7 @@ const temperature = document.querySelector('.temperature');
 const tempHi = document.querySelector('.temp-max-output');
 const tempLow = document.querySelector('.temp-low-output');
 const descriptionLine = document.querySelector('.description');
+const visibility = document.querySelector('.visibility-output');
 // /////////////////////////////////////////////////////////
 const weatherIcon = document.querySelector('.weather-icons');
 
@@ -22,7 +22,9 @@ const pressure = document.querySelector('.pressure-output');
 const sunriseString = document.querySelector('.sunrise');
 const sunsetString = document.querySelector('.sunset');
 const dateString = document.querySelector('.date');
-const windDirDeg = document.querySelector('.wind-direction-degree');
+const windDirDeg = document.querySelector('.wind-direction-degrees-output');
+const gust = document.querySelector('.wind-gusts-output');
+const windSpeed = document.querySelector('.wind-speed-output');
 const needle = document.getElementById('needle');
 // const appDiv = document.querySelector('.app-wrapper');
 
@@ -35,27 +37,27 @@ const needle = document.getElementById('needle');
 // console.log("Hello");
 
 // const url = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=metric&APPID=${API_KEY}`;
-const storage = {};
-window.addEventListener('load', function () {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function (pos) {
-        const { latitude } = pos.coords;
-        storage.lt = latitude;
-        const { longitude } = pos.coords;
-        storage.ln = longitude;
-        const initialUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
-        storage.initUrl = initialUrl;
-        console.log(storage.initUrl);
-        console.log(storage.lt);
-        console.log(storage.ln);
-      },
-      function () {
-        alert('Could not get browser location !');
-      }
-    );
-  }
-});
+// const storage = {};
+// window.addEventListener('load', function () {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(
+//       function (pos) {
+//         const { latitude } = pos.coords;
+//         storage.lt = latitude;
+//         const { longitude } = pos.coords;
+//         storage.ln = longitude;
+//         const initialUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+//         storage.initUrl = initialUrl;
+//         console.log(storage.initUrl);
+//         console.log(storage.lt);
+//         console.log(storage.ln);
+//       },
+//       function () {
+//         alert('Could not get browser location !');
+//       }
+//     );
+//   }
+// });
 // console.log(currentLocation);
 // const request = async function () {
 //   try {
@@ -72,6 +74,7 @@ button.addEventListener('click', e => {
 
 const test = async function () {
   try {
+    const API_KEY = '25f76a4f0875a7268665e799574424e1';
     const loc = input.value;
     // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${storage.lt}&lon=${storage.ln}&units=metric&appid=${API_KEY}`;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=metric&APPID=${API_KEY}`;
@@ -91,6 +94,9 @@ const test = async function () {
       pressure: response.main.pressure,
       humidity: response.main.humidity,
       feelsLike: Math.round(response.main.feels_like),
+      max: Math.round(response.main.temp_max),
+      min: Math.round(response.main.temp_min),
+      visibility: response.visibility,
       sunriseTimestamp: response.sys.sunrise,
       sunsetTimestamp: response.sys.sunset,
       dayOrNight() {
@@ -115,7 +121,6 @@ const test = async function () {
     renderData(values);
 
     windDirectionGadget(values.windDeg, needle);
-    console.log(translateWindDegreesToDirection(values.windDeg));
   } catch (err) {
     console.error(err);
   }
@@ -131,22 +136,34 @@ function renderData(obj) {
   overall.textContent = obj.overallDesc;
   pressure.textContent = obj.pressure;
   feelsLike.textContent = `${obj.feelsLike}°C`;
+  tempHi.textContent = obj.max;
+  tempLow.textContent = obj.min;
+  visibility.textContent = `${
+    obj.visibility % 1000 === 0
+      ? obj.visibility / 1000
+      : (obj.visibility / 1000).toFixed(2)
+  } km`;
   humidity.textContent = `${obj.humidity}%`;
-  windDirDeg.textContent = `wind direction: ${obj.windDeg}&deg;`;
+  windDirDeg.textContent = `${obj.windDeg}° (${translateWindDegreesToDirection(
+    obj.windDeg
+  )})`;
+  gust.textContent = !obj.windGust
+    ? 'none'
+    : `${(obj.windGust * 3.6).toFixed(2)} km/h`;
+  windSpeed.textContent = `${(obj.windSpeed * 3.6).toFixed(2)} km/h`;
 }
-
-function getTimeAndDateFromTimestamp(timestamp, element, dateElement = '') {
-  const date = new Date(timestamp);
-  console.log(date);
-  // const date = new Date(timestamp * 1000);
-  const hour = String(date.getHours()).padStart(2, '0');
-  const minute = String(date.getMinutes()).padStart(2, '0');
-  const day = parseDayName(date.getDay());
-  const month = parseMonthName(date.getMonth());
-  const datum = ordinalNumberSuffix(date.getDate());
-  dateElement.textContent = `${day}, ${month} ${datum}`;
-  element.textContent = `${hour}:${minute}`;
-}
+// function getTimeAndDateFromTimestamp(timestamp, element, dateElement = '') {
+//   const date = new Date(timestamp);
+//   console.log(date);
+//   // const date = new Date(timestamp * 1000);
+//   const hour = String(date.getHours()).padStart(2, '0');
+//   const minute = String(date.getMinutes()).padStart(2, '0');
+//   const day = parseDayName(date.getDay());
+//   const month = parseMonthName(date.getMonth());
+//   const datum = ordinalNumberSuffix(date.getDate());
+//   dateElement.textContent = `${day}, ${month} ${datum}`;
+//   element.textContent = `${hour}:${minute}`;
+// }
 
 const ordinalNumberSuffix = function (date) {
   return `${
