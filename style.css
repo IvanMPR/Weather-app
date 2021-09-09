@@ -7,6 +7,9 @@
   --main-background: rgb(34, 193, 195);
   --text-primary-color: #fff;
   --border-color: #fff;
+  --day-theme-bgd:  background: rgb(11,64,65);
+  --day-theme-lin-grad: linear-gradient(135deg, rgba(11,64,65,1) 0%, rgba(24,67,83,1) 100%); 
+  
 }
 
 * {
@@ -80,6 +83,7 @@ button {
   border: 1px solid var(--border-color);
   margin: 3rem;
   padding: 2rem;
+ 
 }
 
 .icon-wrapper {
@@ -92,9 +96,13 @@ button {
 .weather-icons {
   width: 35%;
 }
+  
 .wind-gadget {
   width: 50%;
   margin: auto;
+}
+.output{
+  color: #333;
 }
 /* media queries */
 @media only screen and (max-width: 375px) {
@@ -120,6 +128,7 @@ button {
   .box {
     padding: 0 3rem;
     margin: 0;
+    border: none;
   }
 }
 @media only screen and (min-width: 376px) and (max-width: 600px) {
@@ -144,8 +153,9 @@ button {
   }
   .box {
     padding: 0 3rem;
-    margin: 0;
+    border: none;
   }
+    
 }
 @media only screen and (min-width: 601px) and (max-width: 1100px) {
   html {
