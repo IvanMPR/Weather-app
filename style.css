@@ -27,8 +27,10 @@ body {
   width: 100vw;
   /* height: 100vh; */
   padding: 1rem;
-  background: var(--main-background);
-  /*background: var(--main-background-gradient) no-repeat; */
+  
+  /* background: #71c7ec; */
+  background: #005073;
+  
   overflow-x: hidden;
   color: var(--text-primary-color);
 }
@@ -83,7 +85,7 @@ button {
   border: 1px solid var(--border-color);
   margin: 3rem;
   padding: 2rem;
- 
+  
 }
 
 .icon-wrapper {
@@ -102,7 +104,7 @@ button {
   margin: auto;
 }
 .output{
-  color: #333;
+  color: orangered;
 }
 /* media queries */
 @media only screen and (max-width: 375px) {
