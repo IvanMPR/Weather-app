@@ -128,7 +128,8 @@ const test = async function () {
 
 function renderData(obj) {
   cityName.textContent = `${obj.city}, (${obj.country})`;
-  const iconUrl = `img/icons/${obj.icon}.svg`;
+  // const iconUrl = `img/icons/${obj.icon}.svg`;
+  const iconUrl = `http://openweathermap.org/img/wn/${obj.icon}@2x.png`;
   weatherIcon.setAttribute('src', iconUrl);
   descriptionLine.textContent = obj.description;
   temperature.textContent = `${obj.temp}°C`;
