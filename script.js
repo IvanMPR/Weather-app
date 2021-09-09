@@ -127,6 +127,7 @@ const test = async function () {
 };
 
 function renderData(obj) {
+  renderDayOrNightBackground(obj.dayOrNight());
   cityName.textContent = `${obj.city}, (${obj.country})`;
   // const iconUrl = `img/icons/${obj.icon}.svg`;
   const iconUrl = `http://openweathermap.org/img/wn/${obj.icon}@2x.png`;
@@ -198,3 +199,9 @@ const translateWindDegreesToDirection = function (degVal) {
     ? 'NW'
     : 'N';
 };
+function renderDayOrNightBackground(input) {
+  const body = document.querySelector('body');
+  return (input = 'day'
+    ? (body.style.backgroundColor = '#71c7ec')
+    : (body.style.backgroundColor = '#005073'));
+}
