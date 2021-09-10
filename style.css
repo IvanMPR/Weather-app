@@ -67,11 +67,27 @@ form {
 input {
   padding: 1rem;
   font-size: 1.6rem;
+  width: 40%;
 }
+input:focus {   
+  outline-offset: -2px;
+  outline-color: orangered;
+}
+ 
+  
 button {
   padding: 1rem 3rem;
   font-size: 1.6rem;
   cursor: pointer;
+  width: 40%;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary-color);
+  background: none;
+  transition: all .2s;
+}
+button:hover{
+  border: 1px solid orangered;
+  color: orangered;
 }
 .app-wrapper {
   display: flex;
@@ -124,7 +140,7 @@ button {
     flex-direction: column;
   }
   button {
-    width: 50%;
+    /* width: 50%; */
     margin-top: 2rem;
   }
   .box {
@@ -150,7 +166,7 @@ button {
     flex-direction: column;
   }
   button {
-    width: 50%;
+    /* width: 50%; */
     margin-top: 2rem;
   }
   .box {
@@ -170,7 +186,7 @@ button {
     flex-direction: column;
   }
   button {
-    width: 43%;
+    /* width: 43%; */
     margin-top: 2rem;
   }
   .box {
