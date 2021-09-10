@@ -127,10 +127,10 @@ const test = async function () {
 };
 
 function renderData(obj) {
-  renderDayOrNightBackground(obj.dayOrNight());
+  // renderDayOrNightBackground(obj.dayOrNight());
   cityName.textContent = `${obj.city}, (${obj.country})`;
-  // const iconUrl = `img/icons/${obj.icon}.svg`;
-  const iconUrl = `http://openweathermap.org/img/wn/${obj.icon}@2x.png`;
+  const iconUrl = `img/icons/${obj.icon}.svg`;
+  // const iconUrl = `http://openweathermap.org/img/wn/${obj.icon}@2x.png`;
   weatherIcon.setAttribute('src', iconUrl);
   descriptionLine.textContent = obj.description;
   temperature.textContent = `${obj.temp}°C`;
@@ -138,8 +138,8 @@ function renderData(obj) {
   overall.textContent = obj.overallDesc;
   pressure.textContent = `${obj.pressure} mb`;
   feelsLike.textContent = `${obj.feelsLike}°C`;
-  tempHi.textContent = obj.max;
-  tempLow.textContent = obj.min;
+  tempHi.textContent = `${obj.max}°C`;
+  tempLow.textContent = `${obj.min}°C`;
   visibility.textContent = `${
     obj.visibility % 1000 === 0
       ? obj.visibility / 1000
@@ -151,8 +151,8 @@ function renderData(obj) {
   )})`;
   gust.textContent = !obj.windGust
     ? 'none'
-    : `${(obj.windGust * 3.6).toFixed(2)} km/h`;
-  windSpeed.textContent = `${(obj.windSpeed * 3.6).toFixed(2)} km/h`;
+    : `${Math.round(obj.windGust * 3.6).toFixed(1)} km/h`;
+  windSpeed.textContent = `${Math.round(obj.windSpeed * 3.6).toFixed(1)} km/h`;
 }
 // function getTimeAndDateFromTimestamp(timestamp, element, dateElement = '') {
 //   const date = new Date(timestamp);
@@ -199,9 +199,9 @@ const translateWindDegreesToDirection = function (degVal) {
     ? 'NW'
     : 'N';
 };
-function renderDayOrNightBackground(input) {
-  const body = document.querySelector('body');
-  return (input = 'day'
-    ? (body.style.backgroundColor = '#71c7ec')
-    : (body.style.backgroundColor = '#005073'));
-}
+// function renderDayOrNightBackground(input) {
+//   const body = document.querySelector('body');
+//   return (input = 'day'
+//     ? (body.style.backgroundColor = '#71c7ec')
+//     : (body.style.backgroundColor = '#005073'));
+// }
