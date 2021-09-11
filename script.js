@@ -6,6 +6,7 @@ const button = document.querySelector('button');
 const cityName = document.querySelector('.location');
 const stateName = document.querySelector('.state-name');
 const date = document.querySelector('.date');
+const time = document.querySelector('.time');
 const overall = document.querySelector('.dominant-weather-condition-output');
 const feelsLike = document.querySelector('.subjective-feeling-output');
 const humidity = document.querySelector('.humidity-output');
@@ -16,7 +17,7 @@ const descriptionLine = document.querySelector('.description');
 const visibility = document.querySelector('.visibility-output');
 // /////////////////////////////////////////////////////////
 const weatherIcon = document.querySelector('.weather-icons');
-
+const outputs = document.querySelectorAll('.output');
 const pressure = document.querySelector('.pressure-output');
 
 const sunriseString = document.querySelector('.sunrise');
@@ -67,6 +68,7 @@ const needle = document.getElementById('needle');
 // };
 // request();
 //  https://www.google.rs/maps/@${latitude},${longitude}
+
 button.addEventListener('click', e => {
   e.preventDefault();
   test();
@@ -112,8 +114,12 @@ const test = async function () {
         const getNumber = dateStr.slice(-2);
         return `${dateStr}${ordinalNumberSuffix(+getNumber)}`;
       },
+      showTime() {
+        const now = new Date();
+        return `${now.getHours()} : ${now.getMinutes()}`;
+      },
     };
-
+    console.log(values.showTime());
     console.log(values);
     console.log(values.dayOrNight());
 
@@ -135,6 +141,7 @@ function renderData(obj) {
   descriptionLine.textContent = obj.description;
   temperature.textContent = `${obj.temp}°C`;
   date.textContent = obj.showDate();
+  time.textContent = obj.showTime();
   overall.textContent = obj.overallDesc;
   pressure.textContent = `${obj.pressure} mb`;
   feelsLike.textContent = `${obj.feelsLike}°C`;
