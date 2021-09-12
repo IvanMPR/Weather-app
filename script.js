@@ -1,7 +1,7 @@
 'use-strict';
 
 const input = document.querySelector('input');
-// const loc = input.value;
+
 const button = document.querySelector('.search-city-btn');
 const buttonCurrentLocation = document.querySelector('.current-location-btn');
 const cityName = document.querySelector('.location');
@@ -19,20 +19,39 @@ const visibility = document.querySelector('.visibility-output');
 // /////////////////////////////////////////////////////////
 const weatherIcon = document.querySelector('.weather-icons');
 const outputs = document.querySelectorAll('.output');
+const blanks = document.querySelectorAll('.blank');
 const pressure = document.querySelector('.pressure-output');
 
-const sunriseString = document.querySelector('.sunrise');
-const sunsetString = document.querySelector('.sunset');
 const dateString = document.querySelector('.date');
 const windDirDeg = document.querySelector('.wind-direction-degrees-output');
 const gust = document.querySelector('.wind-gusts-output');
 const windSpeed = document.querySelector('.wind-speed-output');
 
-// const appDiv = document.querySelector('.app-wrapper');
 const upperPart = document.querySelector('.upper-part');
 const middlePart = document.querySelector('.middle-part');
 const lowerPart = document.querySelector('.lower-part');
 // //////////////////////////////////////////////////////
+// Getting browsers geolocation
+window.addEventListener('load', function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        const { latitude } = pos.coords;
+        // Store browsers latitude
+        storage.lat = latitude;
+        const { longitude } = pos.coords;
+        // Store browsers longitude
+        storage.lon = longitude;
+      },
+      function () {
+        alert('Could not get browser location !');
+      }
+    );
+  }
+});
+// Store browsers lat, lon
+const storage = {};
+// Date
 function showDate() {
   const now = new Date();
   const dateStr = new Intl.DateTimeFormat('en-US', {
@@ -43,68 +62,70 @@ function showDate() {
   const getNumber = dateStr.slice(-2);
   return `${dateStr}${ordinalNumberSuffix(+getNumber)}`;
 }
+//  Time
 function showTime() {
   const now = new Date();
   return `${String(now.getHours()).padStart(2, '0')} : ${String(
     now.getMinutes()
   ).padStart(2, '0')}`;
 }
+// Wind gust
 function displayWindGust(obj) {
   return obj.wind.gust
     ? `${Math.round(obj.wind.gust * 3.6).toFixed(1)} km/h`
     : 'none';
 }
+// Skeleton animation
+function showAnimation() {
+  // outputs.forEach(el => classList.remove('skeleton'));
+  outputs.forEach(el => {
+    el.innerHTML = '';
+    el.classList.add('skeleton');
+  });
+  // blanks.forEach(el => classList.remove('skeleton'));
+  blanks.forEach(el => {
+    el.innerHTML = '';
+    el.classList.add('skeleton');
+  });
+}
+// Call to reverse geocoding API with browsers geolocation
+const apiCallReverseGeocoding = async function () {
+  try {
+    const request = await fetch(
+      `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${storage.lat}2&longitude=${storage.lon}&range=0`,
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'geocodeapi.p.rapidapi.com',
+          'x-rapidapi-key':
+            '667440b8bdmsha4bd6168888fe4dp18db5ejsn6b8b40686a77',
+        },
+      }
+    );
 
-// const link = `https://www.google.rs/maps/@${latitude},${longitude}`;
-// console.log(link);
-
-// const initialUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
-// console.log("Hello");
-
-// const url = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=metric&APPID=${API_KEY}`;
-// const storage = {};
-// buttonCurrentLocation.addEventListener('click', function () {
-// const API_KEY = '25f76a4f0875a7268665e799574424e1';
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       function (pos) {
-//         const { latitude } = pos.coords;
-//         storage.lt = latitude;
-//         const { longitude } = pos.coords;
-//         storage.ln = longitude;
-//         const initialUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
-//         storage.initUrl = initialUrl;
-//         console.log(storage.initUrl);
-//         console.log(storage.lt);
-//         console.log(storage.ln);
-//       },
-//       function () {
-//         alert('Could not get browser location !');
-//       }
-//     );
-//   }
-// });
-// console.log(currentLocation);
-// const request = async function () {
-//   try {
-//   } catch (err) {
-//     console.error(err.message);
-//   }
-// };
-// request();
-//  https://www.google.rs/maps/@${latitude},${longitude}
-
+    const response = await request.json();
+    // Call to OpenWeatherMap API with reversed geocode location
+    apiCallOpenWeather(response[0].City);
+  } catch (err) {
+    console.error(err);
+  }
+};
+// button listener
 button.addEventListener('click', e => {
   e.preventDefault();
-  test();
+  showAnimation();
+  apiCallOpenWeather(input.value);
 });
-
-const test = async function () {
+// location button listener
+buttonCurrentLocation.addEventListener('click', e => {
+  e.preventDefault();
+  apiCallReverseGeocoding();
+});
+// /////////////////////////////////////////////////////////////////////////
+const apiCallOpenWeather = async function (city) {
   try {
     const API_KEY = '25f76a4f0875a7268665e799574424e1';
-    const loc = input.value;
-    // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${storage.lt}&lon=${storage.ln}&units=metric&appid=${API_KEY}`;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&units=metric&APPID=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${API_KEY}`;
     const request = await fetch(url);
     console.log(request);
     const response = await request.json();
@@ -114,13 +135,11 @@ const test = async function () {
     renderDataLower(response);
     const needle = document.getElementById('needle');
     windDirectionGadget(response.wind.deg, needle);
-    // console.log(response);
-    // /////////////////////////////////////////////////////////
   } catch (err) {
     console.error(err);
   }
 };
-
+// Add suffix to date
 const ordinalNumberSuffix = function (date) {
   return `${
     date === 1 || date === 21 || date === 31
@@ -132,12 +151,12 @@ const ordinalNumberSuffix = function (date) {
       : 'th'
   } `;
 };
-
+// Display needle in the direction of the wind
 const windDirectionGadget = function (degree, el) {
   el.style.transform = `rotate(${degree}deg)`;
   el.style.transformOrigin = 'center';
 };
-
+// Wind direction represented by N,E,S,W symbols
 const translateWindDegreesToDirection = function (degVal) {
   return degVal > 30 && degVal <= 60
     ? 'NE'
@@ -155,7 +174,7 @@ const translateWindDegreesToDirection = function (degVal) {
     ? 'NW'
     : 'N';
 };
-
+// Render left(upper on small screen size) part data
 function renderDataUpper(obj) {
   const html = `<p class="location">${obj.name}, (${obj.sys.country})</p>
   <div class="icon-wrapper">
@@ -173,6 +192,7 @@ function renderDataUpper(obj) {
   upperPart.innerHTML = '';
   upperPart.insertAdjacentHTML('beforeend', html);
 }
+// Render middle part data
 function renderDataMiddle(obj) {
   const html = `<h2 class="box-title">Info</h2>
   <div class="data-div">
@@ -219,6 +239,8 @@ function renderDataMiddle(obj) {
   middlePart.innerHTML = '';
   middlePart.insertAdjacentHTML('beforeend', html);
 }
+// Render right(lower on small screen size) part data.
+// Huge because of SVG file
 function renderDataLower(obj) {
   const html = `<h2 class="box-title">Wind</h2>
   <div class="data-div">
