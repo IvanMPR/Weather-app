@@ -12,7 +12,7 @@
     <h1>Weather App</h1>
     <div class="app-wrapper">
       <div class="box upper-part">
-        <p class="location">Belgrade, (RS)</p>
+        <p class="location blank blank-short"></p>
         <div class="icon-wrapper">
           <img
             src="img/placeholder/icon-placeholder.svg"
@@ -20,60 +20,62 @@
             class="weather-icons"
           />
         </div>
-        <p class="description output italic">scattered clouds</p>
-        <p class="temperature large">23&deg;C</p>
+        <p class="description output blank italic blank-medium"></p>
+        <p class="temperature large blank blank-thick"></p>
 
-        <p class="date">Wednesday, April 14th</p>
-        <p class="time">00 : 00</p>
+        <p class="date blank blank-long"></p>
+        <p class="time blank blank-short-time"></p>
       </div>
 
       <div class="box middle-part">
         <h2 class="box-title">Info</h2>
         <div class="data-div">
           <p class="dominant-weather-condition italic">overall weather:</p>
-          <p class="dominant-weather-condition-output output">clouds</p>
+          <p
+            class="dominant-weather-condition-output output output-blank-longer"
+          ></p>
         </div>
         <div class="data-div">
           <p class="subjective-feeling italic">feels like:</p>
-          <p class="subjective-feeling-output output">17 &deg;c</p>
+          <p class="subjective-feeling-output output output-blank-shorter"></p>
         </div>
 
         <div class="data-div">
           <p class="humidity italic">humidity:</p>
-          <p class="humidity-output output">75 %</p>
+          <p class="humidity-output output output-blank-longer"></p>
         </div>
         <div class="data-div">
           <p class="pressure italic">pressure:</p>
-          <p class="pressure-output output">1020 mb</p>
+          <p class="pressure-output output output-blank-longer"></p>
         </div>
         <div class="data-div">
           <p class="temp-max italic">temperature high:</p>
-          <p class="temp-max-output output">23 &deg;c</p>
+          <p class="temp-max-output output output-blank-shorter"></p>
         </div>
         <div class="data-div">
           <p class="temp-low italic">temperature low:</p>
-          <p class="temp-low-output output">17 &deg;c</p>
+          <p class="temp-low-output output output-blank-shorter"></p>
         </div>
         <div class="data-div">
           <p class="visibility italic">visibility:</p>
-          <p class="visibility-output output">10km</p>
+          <p class="visibility-output output output-blank-shorter"></p>
         </div>
       </div>
       <div class="box lower-part">
         <h2 class="box-title">Wind</h2>
         <div class="data-div">
           <p class="wind-direction-degrees italic">wind direction:</p>
-          <p class="wind-direction-degrees-output output">
-            145&deg;<span class="additional-info-output output">(NE)</span>
+          <p class="wind-direction-degrees-output output output-blank-longer">
+            <span class="additional-info-output output"></span>
           </p>
         </div>
         <div class="data-div">
           <p class="wind-speed italic">wind speed:</p>
-          <p class="wind-speed-output output">13km/h</p>
+          <p class="wind-speed-output output output-blank-longer"></p>
         </div>
         <div class="data-div">
           <p class="wind-gusts italic">gusts:</p>
-          <p class="wind-gusts-output output">none</p>
+          <p class="wind-gusts-output output output-blank-shorter"></p>
         </div>
 
         <div class="wind-gadget">
@@ -844,7 +846,7 @@
                 </g>
               </g>
             </g>
-            <g id="needle">
+            <g id="needle" class="rotate">
               <path
                 class="st3"
                 d="M200,176.5l10,21.5l11.4,24.7l-19.8-12.3l-1.6-1l-1.6,1l-19.8,12.3l11.4-24.7L200,176.5 M200,169.4l-12.7,27.4
@@ -945,7 +947,7 @@
     <form>
       <input
         type="text"
-        placeholder="...City Name, or City Name,(County Code)"
+        placeholder="...City Name, or City Name, County Code"
       />
       <button type="submit" class="search-city-btn">Search</button>
       <button type="submit" class="current-location-btn">
