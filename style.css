@@ -8,6 +8,8 @@
   --text-primary-color: #fff;
   --border-color: #fff;
   --day-theme-bgd:  background: rgb(11,64,65);
+  --pale-orangered-color: rgba(255, 83, 73, .5);
+  --pale-white-color: rgba(255,255,255,.5);
   --day-theme-lin-grad: linear-gradient(135deg, rgba(11,64,65,1) 0%, rgba(24,67,83,1) 100%); 
 }
 * {
@@ -30,6 +32,7 @@ body {
   flex-direction: column;
   position: relative;
 }
+/* Utility Classes */
 .italic {
   font-style: italic;
 }
@@ -38,10 +41,65 @@ body {
 }
 
 .skeleton{
-  animation: skeleton-loading 1s linear infinite alternate;
+  animation: skeleton-loading .5s linear infinite alternate;
   border-radius: 0.5rem;
-  opacity: 1;
+  opacity: .7;
 }
+ 
+.rotate{
+  animation: rotateNeedle 1s linear 2 alternate;
+  transform-origin: center;
+}
+.blank-long,
+.blank-medium,
+.blank-thick,
+.blank-short,
+.blank-short-time{
+  margin:1.5rem auto;
+  /* background: var(--pale-white-color); */
+  border-radius: .5rem;
+  background-image: linear-gradient(to right, rgba(255,255,255,.5), #005073 );
+  background-size: 400%;
+}
+.blank-short-time{
+  width: 30%;
+  height: 3rem;
+}
+.blank-short{
+  width: 40%;
+  height: 3rem;
+}
+.blank-medium{
+  width: 55%;
+  height: 3rem;
+}
+.blank-thick{
+  width: 45%;
+  height: 7.5rem;
+}
+.blank-long{
+  width: 70%;
+  height: 3rem;
+}
+.output-blank-longer,
+.output-blank-shorter{
+  background-image: linear-gradient(to right, rgba(255, 83, 73, .9), #005073 );
+  background-size: 400%;
+  border-radius: .5rem;
+}
+  
+.output-blank-longer{
+  width: 25%;
+  height: 2.5rem;
+}
+.output-blank-shorter{
+  width: 15%;
+  height: 2.5rem;
+}
+  
+ 
+  
+/* //////////////////////////////////////// */
 .data-div {
   display: flex;
   align-items: center;
@@ -243,14 +301,29 @@ button:hover{
  
 }
   @keyframes skeleton-loading{
+    0% {background-position: left}
+    100% {background-position: right}  
+  }
+    
+    
+    
+  
+  @keyframes rotateNeedle {
     0%{
-      background-color:hsl(200, 20%, 70%);
+      transform: rotate(0deg);
+    }
+    50%{
+      transform: rotate(180deg);
     }
     100%{
-      background-color: hsl(200, 20%, 95%);
+      transform: rotate(360deg);
     }
-    
   }
+  
+  
+  
+  
+  
   
   
 
