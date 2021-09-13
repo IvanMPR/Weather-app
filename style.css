@@ -204,6 +204,13 @@ button:hover{
     overflow-x: hidden;
     flex-direction: column-reverse;
   }
+  h1{
+    display: none;
+  }
+  input,
+  button{
+    width: 40rem;
+  }
   p {
     margin: 1.3rem;
   }
@@ -213,6 +220,7 @@ button:hover{
   }
   form {
     flex-direction: column;
+    margin-top: 3rem;
   }
   button {
     margin-top: 1rem;
@@ -234,6 +242,11 @@ button:hover{
   body {
     padding: 0;
     flex-direction: column-reverse;
+    overflow-x: hidden;
+  }
+  input,
+  button{
+    width: 40rem;
   }
   h1{
     top: 3%;
