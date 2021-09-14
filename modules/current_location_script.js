@@ -1,4 +1,7 @@
-import { apiCallOpenWeather, showAnimation } from '../script.js';
+import { apiCallOpenWeather } from '../script.js';
+//prettier-ignore
+import { animationUpper, animationMiddle, animationLower} from '../modules/animation.js';
+
 // Getting browsers geolocation
 window.addEventListener('load', function () {
   if (navigator.geolocation) {
@@ -17,12 +20,15 @@ window.addEventListener('load', function () {
     );
   }
 });
+// /////////////////////////////////////////////////////////
 // Store browsers lat, lon
 const storage = {};
-
+// /////////////////////////////////////////////////////////
 export const apiCallReverseGeocoding = async function () {
-  showAnimation();
   try {
+    animationUpper();
+    animationMiddle();
+    animationLower();
     const request = await fetch(
       `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${storage.lat}2&longitude=${storage.lon}&range=0`,
       {
@@ -34,7 +40,6 @@ export const apiCallReverseGeocoding = async function () {
         },
       }
     );
-
     const response = await request.json();
     // Call to OpenWeatherMap API with reversed geocode location
     apiCallOpenWeather(response[0].City);
