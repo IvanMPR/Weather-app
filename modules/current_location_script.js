@@ -1,6 +1,8 @@
-import { apiCallOpenWeather } from '../script.js';
+import { apiCallOpenWeather, upperPart } from '../script.js';
 //prettier-ignore
 import { animationUpper, animationMiddle, animationLower} from '../modules/animation.js';
+//prettier-ignore
+import {  renderError, renderMiddleOnError,  renderLowerOnError, timeout } from '../modules/errors.js';
 
 // Getting browsers geolocation
 window.addEventListener('load', function () {
@@ -29,21 +31,30 @@ export const apiCallReverseGeocoding = async function () {
     animationUpper();
     animationMiddle();
     animationLower();
-    const request = await fetch(
-      `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${storage.lat}2&longitude=${storage.lon}&range=0`,
-      {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-host': 'geocodeapi.p.rapidapi.com',
-          'x-rapidapi-key':
-            '667440b8bdmsha4bd6168888fe4dp18db5ejsn6b8b40686a77',
-        },
-      }
-    );
+    const request = await Promise.race([
+      fetch(
+        `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${storage.lat}2&longitude=${storage.lon}&range=0`,
+        {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': 'geocodeapi.p.rapidapi.com',
+            'x-rapidapi-key':
+              '667440b8bdmsha4bd6168888fe4dp18db5ejsn6b8b40686a77',
+          },
+        }
+      ),
+      timeout(5),
+    ]);
+    if (!request.ok) {
+      throw new Error('Failed to retrieve current location !');
+    }
     const response = await request.json();
     // Call to OpenWeatherMap API with reversed geocode location
     apiCallOpenWeather(response[0].City);
   } catch (err) {
+    renderError(upperPart, err);
+    renderMiddleOnError();
+    renderLowerOnError();
     console.error(err);
   }
 };
