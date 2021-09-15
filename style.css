@@ -33,6 +33,7 @@ body {
   position: relative;
 }
 /* Utility Classes */
+
 .italic {
   font-style: italic;
 }
@@ -143,7 +144,7 @@ input{
 }
 input:focus {   
   outline-offset: -2px;
- outline-color: orangered; 
+  outline-color: orangered; 
 }
 button{
   padding: 1rem 3rem;
@@ -184,21 +185,32 @@ button:hover{
   height: 15rem;
   display: grid;
   place-items: center;
-  
 }
-
 .weather-icons {
   width: 35%;
 }
-  
 .wind-gadget {
   width: 50%;
   margin: auto;
 }
-.output{
+.output,
+.error-message{
   color: orangered;
   
 }
+/* ////////////////////////////////////////////////////////////// */
+.error-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+}
+  
+
+  
 /* ////////////////////////////////////////////////////////////// */
 /* media queries */
 @media only screen and (max-width: 375px) {
