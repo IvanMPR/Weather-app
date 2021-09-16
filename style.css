@@ -1,132 +1,50 @@
 :root {
-  --main-background-gradient: linear-gradient(
-    135deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(55, 68, 73, 1) 100%
-  );
-  --main-background: rgb(34, 193, 195);
+  --main-background: #005073;
   --text-primary-color: #fff;
+  --text-secondary-color: #ff4500; /* orangered */
   --border-color: #fff;
-  --day-theme-bgd:  background: rgb(11,64,65);
-  --pale-orangered-color: rgba(255, 83, 73, .5);
-  --pale-white-color: rgba(255,255,255,.5);
-  --day-theme-lin-grad: linear-gradient(135deg, rgba(11,64,65,1) 0%, rgba(24,67,83,1) 100%); 
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   width: 100vw;
   padding: 1rem;
-  background: #005073;
+  background: var(--main-background);
   overflow-x: hidden;
   color: var(--text-primary-color);
   display: flex;
   flex-direction: column;
   position: relative;
 }
-/* Utility Classes */
 
-.italic {
-  font-style: italic;
-}
-.large {
-  font-size: 7rem;
-}
-
-.skeleton{
-  animation: skeleton-loading .5s linear infinite alternate;
-  border-radius: 0.5rem;
-  opacity: .7;
-}
- 
-.rotate{
-  animation: rotateNeedle 1s linear 2 alternate;
-  transform-origin: center;
-}
-.blank-long,
-.blank-medium,
-.blank-thick,
-.blank-short,
-.blank-short-time,
-.blank-large-icon{
-  margin:1.5rem auto;
-  
-  border-radius: .5rem;
-  background-image: linear-gradient(to right, rgba(255,255,255,.5), #005073 );
-  background-size: 400%;
-}
-.blank-short-time{
-  width: 30%;
-  height: 3rem;
-}
-.blank-short{
-  width: 40%;
-  height: 3rem;
-}
-.blank-medium{
-  width: 55%;
-  height: 3rem;
-}
-.blank-thick{
-  width: 45%;
-  height: 7.5rem;
-}
-.blank-long{
-  width: 70%;
-  height: 3rem;
-}
-.blank-large-icon {
-  width: 50%;
-  height: 15rem;
-}
-.output-blank-longer,
-.output-blank-shorter{
-  background-image: linear-gradient(to right, rgba(255, 83, 73, .9), #005073 );
-  background-size: 400%;
-  border-radius: .5rem;
-}
-  
-.output-blank-longer{
-  width: 25%;
-  height: 2.5rem;
-}
-.output-blank-shorter{
-  width: 15%;
-  height: 2.5rem;
-}
-  
- 
-  
-/* //////////////////////////////////////// */
-.data-div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 h1 {
   font-size: 3.3rem;
   margin: auto;
   position: absolute;
   top: 4%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
+
 h2 {
   font-size: 2.5rem;
   margin: 1.5rem;
 }
+
 p {
   font-size: 2.2rem;
   margin: 1.5rem;
-  
 }
 form {
   display: flex;
@@ -136,17 +54,17 @@ form {
   margin-top: 2rem;
   width: 100%;
 }
-input{
+input {
   padding: 1rem;
   font-size: 1.6rem;
   width: 50rem;
   margin-bottom: 1rem;
 }
-input:focus {   
+input:focus {
   outline-offset: -2px;
-  outline-color: orangered; 
+  outline-color: var(--text-secondary-color);
 }
-button{
+button {
   padding: 1rem 3rem;
   font-size: 1.6rem;
   cursor: pointer;
@@ -155,15 +73,101 @@ button{
   color: var(--text-primary-color);
   background: none;
   text-transform: uppercase;
-  transition: all .2s; 
+  transition: all 0.2s;
 }
-button:hover{
-  border: 1px solid orangered;
-  color: orangered; 
+button:hover {
+  border: 1px solid var(--text-secondary-color);
+  color: var(--text-secondary-color);
 }
-.current-location-btn{
+
+/* *** Utility Classes *** */
+
+.italic {
+  font-style: italic;
+}
+
+.large {
+  font-size: 7rem;
+}
+
+.skeleton {
+  animation: skeleton-loading 0.5s linear infinite alternate;
+  border-radius: 0.5rem;
+  opacity: 0.7;
+}
+
+.rotate {
+  animation: rotateNeedle 1s linear 2 alternate;
+  transform-origin: center;
+}
+
+.blank-long,
+.blank-medium,
+.blank-thick,
+.blank-short,
+.blank-short-time,
+.blank-large-icon {
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.5),
+    #005073
+  );
+  background-size: 400%;
+}
+
+.blank-short-time {
+  width: 30%;
+  height: 3rem;
+}
+.blank-short {
+  width: 40%;
+  height: 3rem;
+}
+.blank-medium {
+  width: 55%;
+  height: 3rem;
+}
+.blank-thick {
+  width: 45%;
+  height: 7.5rem;
+}
+.blank-long {
+  width: 70%;
+  height: 3rem;
+}
+.blank-large-icon {
+  width: 50%;
+  height: 15rem;
+}
+.output-blank-longer,
+.output-blank-shorter {
+  background-image: linear-gradient(to right, rgba(255, 83, 73, 0.9), #005073);
+  background-size: 400%;
+  border-radius: 0.5rem;
+}
+
+.output-blank-longer {
+  width: 25%;
+  height: 2.5rem;
+}
+.output-blank-shorter {
+  width: 15%;
+  height: 2.5rem;
+}
+
+/* //////////////////////////////////////// */
+.data-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.current-location-btn {
   margin-top: 1rem;
 }
+
 .app-wrapper {
   display: flex;
   align-items: center;
@@ -177,29 +181,30 @@ button:hover{
   border: 1px solid var(--border-color);
   margin: 3rem;
   padding: 2rem;
-  
 }
 .icon-wrapper {
   margin: 1rem;
-  /* height: 35%; */
   height: 15rem;
   display: grid;
   place-items: center;
 }
+
 .weather-icons {
   width: 35%;
 }
+
 .wind-gadget {
   width: 50%;
   margin: auto;
 }
+
 .output,
-.error-message{
-  color: orangered;
-  
+.error-message {
+  color: var(--text-secondary-color);
 }
 /* ////////////////////////////////////////////////////////////// */
-.error-container{
+
+.error-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -208,11 +213,9 @@ button:hover{
   justify-content: center;
   margin-top: 10rem;
 }
-  
-
-  
 /* ////////////////////////////////////////////////////////////// */
-/* media queries */
+/* *** Media Queries *** */
+
 @media only screen and (max-width: 375px) {
   html {
     font-size: 45%;
@@ -222,20 +225,17 @@ button:hover{
     overflow-x: hidden;
     flex-direction: column-reverse;
   }
-  h1{
+  h1 {
     display: none;
   }
   input,
-  button{
+  button {
     width: 40rem;
   }
   p {
     margin: 1.3rem;
   }
-  .app-wrapper {
-    flex-direction: column;
-    margin-top: 5rem;
-  }
+
   form {
     flex-direction: column;
     margin-top: 3rem;
@@ -243,16 +243,20 @@ button:hover{
   button {
     margin-top: 1rem;
   }
-   input{
-     margin-bottom: 0;
-   } 
-    
+  input {
+    margin-bottom: 0;
+  }
+  .app-wrapper {
+    flex-direction: column;
+    margin-top: 5rem;
+  }
   .box {
     padding: 0 3rem;
     margin: 0;
     border: none;
   }
 }
+
 @media only screen and (min-width: 376px) and (max-width: 600px) {
   html {
     font-size: 55%;
@@ -263,49 +267,44 @@ button:hover{
     overflow-x: hidden;
   }
   input,
-  button{
+  button {
     width: 40rem;
   }
-  h1{
+  h1 {
     top: 3%;
   }
   p {
     margin: 1.4rem;
   }
-  .app-wrapper {
-    flex-direction: column;
-    margin-top: 5rem;
-  }
   form {
     margin-top: 10rem;
   }
   button {
     margin-top: 1rem;
   }
-  input{
+  input {
     margin-bottom: 0;
   }
-   
+  .app-wrapper {
+    flex-direction: column;
+    margin-top: 5rem;
+  }
   .box {
     padding: 0 3rem;
     border: none;
     margin: 0;
   }
-    
 }
+
 @media only screen and (min-width: 601px) and (max-width: 1100px) {
   html {
     font-size: 62.5%;
   }
-  body{
+  body {
     flex-direction: column-reverse;
   }
-  h1{
+  h1 {
     top: 3%;
-  }
-  .app-wrapper {
-    flex-direction: column;
-    margin-top: 5rem;
   }
   form {
     flex-direction: column;
@@ -315,54 +314,44 @@ button:hover{
     margin-top: 1rem;
     width: 55rem;
   }
-  input{
+  input {
     width: 55rem;
     margin-bottom: 0;
+  }
+  .app-wrapper {
+    flex-direction: column;
+    margin-top: 5rem;
   }
   .box {
     width: 55rem;
     margin: 1rem;
   }
 }
-    
+
 @media only screen and (min-width: 1101px) and (max-width: 1400px) {
   html {
     font-size: 50%;
   }
- 
 }
-  @keyframes skeleton-loading{
-    0% {background-position: left}
-    100% {background-position: right}  
+/* *** Animations *** */
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: left;
   }
-    
-  @keyframes rotateNeedle {
-    0%{
-      transform: rotate(0deg);
-    }
-    50%{
-      transform: rotate(180deg);
-    }
-    100%{
-      transform: rotate(360deg);
-    }
+  100% {
+    background-position: right;
   }
-    
-    
-  
-  
-  
-  
-  
-  
-  
-  
+}
 
-
-  
-  
-  
-  
-
-
-
+@keyframes rotateNeedle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
