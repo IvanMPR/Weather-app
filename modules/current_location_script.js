@@ -55,6 +55,5 @@ export const apiCallReverseGeocoding = async function () {
     renderError(upperPart, err);
     renderMiddleOnError();
     renderLowerOnError();
-    console.error(err);
   }
 };
