@@ -39,8 +39,7 @@ export const apiCallOpenWeather = async function (city) {
     if (!request.ok) {
       throw new Error('Country not found !');
     }
-    console.log(request);
-    const response = await request.json();
+      const response = await request.json();
     // /////////////////////////////////////////////////////////
     renderDataUpper(response);
     renderDataMiddle(response);
@@ -54,4 +53,5 @@ export const apiCallOpenWeather = async function (city) {
     renderLowerOnError();
     console.error(err);
   }
-};
+};    
+
