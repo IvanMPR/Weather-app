@@ -5,23 +5,29 @@ import { animationUpper, animationMiddle, animationLower} from '../modules/anima
 import {  renderError, renderMiddleOnError,  renderLowerOnError, timeout } from '../modules/errors.js';
 
 // Getting browsers geolocation
-window.addEventListener('load', function () {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function (pos) {
-        const { latitude } = pos.coords;
-        // Store browsers latitude
-        storage.lat = latitude;
-        const { longitude } = pos.coords;
-        // Store browsers longitude
-        storage.lon = longitude;
-      },
-      function () {
-        alert('Could not get browser location !');
-      }
-    );
-  }
-});
+// window.addEventListener('load', function () {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(
+//       function (pos) {
+//         const { latitude } = pos.coords;
+//         // Store browsers latitude
+//         storage.lat = latitude;
+//         const { longitude } = pos.coords;
+//         // Store browsers longitude
+//         storage.lon = longitude;
+//       },
+//       function () {
+//         alert('Could not get browser location !');
+//       }
+//     );
+//   }
+// });
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
 // /////////////////////////////////////////////////////////
 // Store browsers lat, lon
 const storage = {};
@@ -31,9 +37,12 @@ export const apiCallReverseGeocoding = async function () {
     animationUpper();
     animationMiddle();
     animationLower();
+    const getCoords = await getPosition();
+    const { latitude, longitude } = getCoords.coords;
+
     const request = await Promise.race([
       fetch(
-        `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${storage.lat}2&longitude=${storage.lon}&range=0`,
+        `https://geocodeapi.p.rapidapi.com/GetNearestCities?latitude=${latitude}2&longitude=${longitude}&range=0`,
         {
           method: 'GET',
           headers: {
