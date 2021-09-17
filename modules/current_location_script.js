@@ -3,34 +3,12 @@ import { apiCallOpenWeather, upperPart } from '../script.js';
 import { animationUpper, animationMiddle, animationLower} from '../modules/animation.js';
 //prettier-ignore
 import {  renderError, renderMiddleOnError,  renderLowerOnError, timeout } from '../modules/errors.js';
-
-// Getting browsers geolocation
-// window.addEventListener('load', function () {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       function (pos) {
-//         const { latitude } = pos.coords;
-//         // Store browsers latitude
-//         storage.lat = latitude;
-//         const { longitude } = pos.coords;
-//         // Store browsers longitude
-//         storage.lon = longitude;
-//       },
-//       function () {
-//         alert('Could not get browser location !');
-//       }
-//     );
-//   }
-// });
+// Get geolocation as Promise
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
-
-// /////////////////////////////////////////////////////////
-// Store browsers lat, lon
-const storage = {};
 // /////////////////////////////////////////////////////////
 export const apiCallReverseGeocoding = async function () {
   try {
