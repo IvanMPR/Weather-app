@@ -21,7 +21,7 @@ results(for example, if you type 'Rome' meaning Italian capital, result will be 
 
 # Tech
 This Weather app was created in HTML, CSS and JavaScript. Icons are in SVG format and customized for this project, as well as the wind direction gadget.
-Data string is gathered from Iternationalization (Intl) Web API. 
+Date string is gathered from Iternationalization (Intl) Web API. 
 While loading data, app displays skeleton pulsing animation. 
 Async tasks were handled with async/await syntax, if request lasts longer than 5 seconds, error will be rendered in the main box.
 
