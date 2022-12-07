@@ -7,7 +7,7 @@
 <br>
 
 # About
-This project took me more time than expected. Main reason for that is the fact that I wasn't 
+<a href="https://ivanmpr.github.io/Weather-app/">This project</a> took me more time than expected. Main reason for that is the fact that I wasn't 
 fully aware of all options and functionality I want to implement, so I made decisions along 
 the way. Weather app is responsive, and works behind the scene with two third party API-s. 
 First is <a href="https://rapidapi.com/Noggle/api/reverse-geocoding-and-geolocation-service/">Reverse Geocoding and Geolocation Service API</a>, and second is 
